@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { searchPosts } from '../api';
 
-const SearchBar = () => {
+const SearchBar = ({ setLoading, setPosts, setTotalPosts, setFilter }) => {
 	const [search, setSearch] = useState('');
-	const [filter, setFilter] = useState('person');
 
 	const handleInput = (e) => {
 		setSearch(e.target.value);
@@ -11,14 +11,20 @@ const SearchBar = () => {
 		setFilter(e.target.value);
 	};
 
-	const handleSearch = () => {
-		console.log(search);
+	const handleSearch = async (e) => {
+		if (e.key === 'Enter' || e.key === undefined) {
+			try {
+				setLoading(true);
+				const res = await searchPosts(search);
+				console.log(res);
+				setPosts(res.data.results);
+				setTotalPosts(res.data.count);
+				setLoading(false);
+			} catch (error) {
+				alert(error.message);
+			}
+		}
 	};
-
-	useEffect(() => {
-		console.log(filter);
-	}, [filter]);
-
 	return (
 		<div className='flex items-center justify-between h-10 mb-4'>
 			<div className='flex w-72 items-center justify-between'>
@@ -35,8 +41,10 @@ const SearchBar = () => {
 				<button onClick={handleSearch}>&#128269;</button>
 			</div>
 			<select onChange={handleFilters}>
-				<option value='person'>Person</option>
-				<option value='robot'>Robot</option>
+				<option value='all'>All</option>
+				<option value='male'>Male</option>
+				<option value='female'>Female</option>
+				<option value='n/a'>Robots</option>
 			</select>
 		</div>
 	);

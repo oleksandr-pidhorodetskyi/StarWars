@@ -6,4 +6,9 @@ const getPosts = async (currentPage) => {
 	);
 	return res;
 };
-export { getPosts };
+const searchPosts = async (name) => {
+	const res = await axios.get(`https://swapi.dev/api/people/?search=${name}`);
+	return res;
+};
+
+export { getPosts, searchPosts };
