@@ -10,7 +10,8 @@ const Home = () => {
 	const [loading, setLoading] = useState(false);
 	const [currentPage, setCurentPage] = useState(1);
 	const [postsPerPage] = useState(10);
-	const [totalPosts, setTotalPosts] = useState(10);
+	const [totalPosts, setTotalPosts] = useState(0);
+	const [MaxPosts, setMaxPosts] = useState(0);
 
 	const [isFiltered, setIsFiltered] = useState(false);
 	const [search, setSearch] = useState('');
@@ -30,6 +31,7 @@ const Home = () => {
 				}
 				setPosts(res.data.results);
 				setTotalPosts(res.data.count);
+				setMaxPosts(res.data.count);
 				setLoading(false);
 			} catch (error) {
 				alert(error.message);
@@ -47,6 +49,7 @@ const Home = () => {
 				const res = await searchPosts(search);
 				setPosts(res.data.results);
 				setTotalPosts(res.data.count);
+				setMaxPosts(res.data.count);
 				setLoading(false);
 			} catch (error) {
 				alert(error.message);
@@ -73,7 +76,9 @@ const Home = () => {
 			}
 		});
 		setFilteredPosts(filtered);
-		setTotalPosts(filtered.length);
+		if (filter === 'all') {
+			setTotalPosts(MaxPosts);
+		} else setTotalPosts(filtered.length);
 	}, [filter]);
 
 	return (
