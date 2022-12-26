@@ -6,6 +6,10 @@ const getPosts = async (currentPage) => {
 	);
 	return res;
 };
+const getPost = async (type, id) => {
+	const res = await axios.get(`https://swapi.dev/api/${type}/${id}`);
+	return res;
+};
 const searchPosts = async (name) => {
 	const res = await axios.get(`https://swapi.dev/api/people/?search=${name}`);
 	return res;
@@ -17,4 +21,4 @@ const changeSearchedPage = async (name, currentPage) => {
 	return res;
 };
 
-export { getPosts, searchPosts, changeSearchedPage };
+export { getPosts, searchPosts, changeSearchedPage, getPost };

@@ -93,12 +93,18 @@ const Home = () => {
 						handleSearch={handleSearch}
 						search={search}
 					/>
-					<Cards posts={filteredPosts} />
-					<Pagination
-						postPerPage={postsPerPage}
-						totalPosts={totalPosts}
-						setCurentPage={setCurentPage}
-					/>
+					{totalPosts !== 0 ? (
+						<>
+							<Cards posts={filteredPosts} />
+							<Pagination
+								postPerPage={postsPerPage}
+								totalPosts={totalPosts}
+								setCurentPage={setCurentPage}
+							/>
+						</>
+					) : (
+						<div className='text-center'>NOT FOUND</div>
+					)}
 				</div>
 			)}
 		</main>
