@@ -2,7 +2,6 @@ import React from 'react';
 import getId from '../helpers/getId';
 
 const CharacterImg = ({ url }) => {
-	console.log(url);
 	return (
 		<img
 			className='h-80 rounded mr-10'

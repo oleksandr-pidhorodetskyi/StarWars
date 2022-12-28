@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPost } from '../api';
 import CharacterImg from '../components/CharacterImg';
-import FilmCard from '../components/FilmCard.jsx/FilmCard';
 import Loader from '../components/Loader';
-import getId from '../helpers/getId';
-import { v4 as uuidv4 } from 'uuid';
+import Slider from '../components/Slider/Slider';
 
 const Character = () => {
 	let { id } = useParams();
@@ -28,12 +26,12 @@ const Character = () => {
 	}, [id]);
 
 	return (
-		<div className='flex justify-center items-center h-full'>
+		<div className='flex justify-center items-center h-full pb-10'>
 			{loading ? (
 				<Loader />
 			) : (
-				<div className='w-2/3 bg-gray-100 py-5 px-10 rounded-lg'>
-					<div className='flex'>
+				<div className='w-2/3 bg-gray-100 py-5 px-10 rounded-lg shadow-lg shadow-black-500/40'>
+					<div className='flex p-5 bg-gray-300 rounded-lg shadow-lg shadow-black-500/40'>
 						<div>
 							<CharacterImg url={data.url} />
 						</div>
@@ -70,9 +68,7 @@ const Character = () => {
 					</div>
 					<div className='films flex flex-col items-center justify-center p-4'>
 						<h2 className='font-bold text-2xl mb-3'>FILMS</h2>
-						{data.films.map((film) => (
-							<FilmCard key={uuidv4()} film={film} />
-						))}
+						<Slider data={data.films} />
 					</div>
 				</div>
 			)}

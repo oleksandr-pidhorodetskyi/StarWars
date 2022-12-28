@@ -4,6 +4,7 @@ import Pagination from '.././components/Pagination';
 import Loader from '.././components/Loader';
 import { changeSearchedPage, getPosts, searchPosts } from '.././api';
 import SearchBar from '../components/SearchBar';
+import Header from '../components/Header/Header';
 
 const Home = () => {
 	const [posts, setPosts] = useState([]);
@@ -82,32 +83,40 @@ const Home = () => {
 	}, [filter]);
 
 	return (
-		<main className='flex justify-center items-center h-full'>
-			{loading ? (
-				<Loader />
-			) : (
-				<div className='w-4/5'>
+		<div>
+			{/* <Header /> */}
+			<main className='flex justify-center items-center h-full '>
+				<div
+					className='w-4/5 bg-gray-100 p-5 
+				rounded-lg shadow-lg shadow-black-500/40'
+				>
 					<SearchBar
 						setFilter={setFilter}
 						setSearch={setSearch}
 						handleSearch={handleSearch}
 						search={search}
 					/>
-					{totalPosts !== 0 ? (
-						<>
-							<Cards posts={filteredPosts} />
-							<Pagination
-								postPerPage={postsPerPage}
-								totalPosts={totalPosts}
-								setCurentPage={setCurentPage}
-							/>
-						</>
+					{loading ? (
+						<Loader />
 					) : (
-						<div className='text-center'>NOT FOUND</div>
+						<div>
+							{totalPosts !== 0 ? (
+								<>
+									<Cards posts={filteredPosts} />
+									<Pagination
+										postPerPage={postsPerPage}
+										totalPosts={totalPosts}
+										setCurentPage={setCurentPage}
+									/>
+								</>
+							) : (
+								<div className='text-center'>NOT FOUND</div>
+							)}
+						</div>
 					)}
 				</div>
-			)}
-		</main>
+			</main>
+		</div>
 	);
 };
 

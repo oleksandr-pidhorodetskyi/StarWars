@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getPost } from '../../api';
-import getId from '../../helpers/getId';
-import Loader from '../Loader';
-import FilmImg from './components/FilmImg';
+import { getPost } from '../../../api';
+import getId from '../../../helpers/getId';
+
+import Loader from '../../Loader';
+
+import FilmImg from './FilmImg';
 
 const FilmCard = ({ film }) => {
 	const [data, setData] = useState({});
@@ -19,10 +21,15 @@ const FilmCard = ({ film }) => {
 		fetchPosts();
 	}, [film]);
 	return (
-		<div className=' w-3/4'>
+		<div className=''>
 			{data.url ? (
-				<div className='flex mb-4 bg-gray-300 p-4 rounded-lg'>
-					<div className='mr-10'>
+				<div
+					className='flex h-full mr-4 bg-gray-300 p-4 rounded-lg 
+				cursor-pointer transition-all duration-300 
+				grayscale hover:grayscale-0
+				shadow-lg shadow-black-500/40'
+				>
+					<div className='w-72 h-72 mr-5 '>
 						<FilmImg url={data.url} />
 					</div>
 					<aside className='pt-5'>

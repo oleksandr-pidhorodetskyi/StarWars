@@ -6,7 +6,7 @@ const Pagination = ({ postPerPage, totalPosts, setCurentPage }) => {
 		pageNumbers.push(i);
 	}
 	return (
-		<ul className='flex justify-center'>
+		<ul className='flex justify-center mb-2'>
 			{pageNumbers.map((number) => (
 				<li
 					key={number}

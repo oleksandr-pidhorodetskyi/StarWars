@@ -2,10 +2,9 @@ import React from 'react';
 import getId from '../../../helpers/getId';
 
 const FilmImg = ({ url }) => {
-	console.log(url);
 	return (
 		<img
-			className='h-80 rounded'
+			className='w-72 h-72 object-cover hover:scale-105 ease-in-out transition-all duration-300 rounded'
 			alt='Film'
 			src={`https://starwars-visualguide.com/assets/img/films/${getId(
 				url
